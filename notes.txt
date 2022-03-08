@@ -1,11 +1,10 @@
 1. Jak podeszłabyś do takiego wyzwania, w którym istnieje mirkoserwis w 3 replikach i tylko 1 z tych replik powinna przyjąć odpowiednią zmienną środowiskową, 
 nie ingerując w aplikację, ale możesz ingerować w samego Dockerfile’a / entrypointa i definicję wdrożenia w obrębie kubernetesa - Helm Charts / YAML file?
 
-Użyłabym StatefulSet zamiast Deploymentu. 
-
+Gdyby było to możliwe to zaleciłabym przekształcenie trzech replik na trzy osobne usługi, wtedy każda z nich byłaby traktowana oddzielnie i mogłaby przyjąć różne zmienne środowiskowe.
+W przeciwnym wypadku spróbowałabym użycia StatefulSet zamiast Deploymentu. 
 Deploymenty nie są zbyt dobre w tym przypadku, ponieważ nie mają pewnego rodzaju uporządkowania. Do tego celu lepiej użyć StatefulSet, ponieważ ma on 
 spójne nazewnictwo, np. pod-0, pod-1, pod-2. Po wdrożeniu StatefulSet pody będą miały nazwy zgodne z nazwą w statefulset. 
-
 Na przykład, jeśli class_name_idx - jest indeksem nazwy klasy w liście nazw klas, num_replicas - jest liczbą replik w StatefulSet, a pod_idx - jest 
 indeksem pod w StatefulSet, to pod powinien uruchomić zadanie tylko wtedy, gdy: class_name_idx % num_replicas == pod_idx.
 
