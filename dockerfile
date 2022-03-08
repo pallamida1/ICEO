@@ -12,6 +12,5 @@ CMD ["nginx"]
 
 EXPOSE 80 443
 
-echo "ICEO" > /usr/share/nginx/html/index.html
 
 
