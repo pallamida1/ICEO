@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+	  certmanager.io/cluster-issuer: letsencrypt-staging
+      kubernetes.io/ingress.class: nginx
+	  nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+	  nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+      nginx.ingress.kubernetes.io/cors-allow-methods: PUT, GET, POST, 
+           OPTIONS, DELETE
+      nginx.ingress.kubernetes.io/enable-cors: "true"
+	  
+    name: example
+    namespace: foo
+  spec:
+    ingressClassName: ingress-internal
+    rules:
+      - host: hello.iceo.co
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: exampleService
+                  port: 80
+   
