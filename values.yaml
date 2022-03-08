@@ -10,7 +10,7 @@ controller:
   nginxplus: false
 
   # Timeout in milliseconds which the Ingress Controller will wait for a successful NGINX reload after a change or at the initial start.
-  nginxReloadTimeout: 60000
+  nginxReloadTimeout: 30000
 
   ## Support for App Protect
   appprotect:
@@ -51,6 +51,12 @@ controller:
 
     ## The pull policy for the Ingress controller image.
     pullPolicy: IfNotPresent
+    
+    #######################################################
+ # -- Optionally customize the pod hostname.
+  hostname: {}
+  #########################################################
+ 
 
   config:
     ## The name of the ConfigMap used by the Ingress controller.
@@ -108,6 +114,26 @@ controller:
     # requests:
     #   cpu: 100m
     #   memory: 64Mi
+    
+###################################
+
+
+ livenessProbe:
+    failureThreshold: 3
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  readinessProbe:
+    failureThreshold: 6
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 5
+
+
+########################################
+
 
   ## The tolerations of the Ingress controller pods.
   tolerations: []
@@ -189,6 +215,7 @@ controller:
     enable: true
 
     ## Set the port where the NGINX stub_status or the NGINX Plus API is exposed.
+    ##APP_PORT
     port: 8080
 
     ## Add IPv4 IP/CIDR blocks to the allow list for NGINX stub_status or the NGINX Plus API. Separate multiple IP/CIDR by commas.
