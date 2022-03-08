@@ -11,6 +11,12 @@ indeksem pod w StatefulSet, to pod powinien uruchomić zadanie tylko wtedy, gdy:
 
 2. NOTATKI:
 
+serwis nie może być uruchomiony z uprawnieniami roota:
+
+-można użyć obrazu dla użytkowników non-root - “nginxinc/nginx-unprivileged”
+-można usunąć (lub skomentować) dyrektywę user na górze pliku nginx.conf.
+
+
 echo "ICEO" > /usr/share/nginx/html/index.html 
 
 
