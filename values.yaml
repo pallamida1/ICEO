@@ -121,13 +121,13 @@ controller:
  livenessProbe:
     failureThreshold: 3
     initialDelaySeconds: 30
-    periodSeconds: 10
+    periodSeconds: 60
     successThreshold: 1
     timeoutSeconds: 5
   readinessProbe:
     failureThreshold: 6
-    initialDelaySeconds: 0
-    periodSeconds: 5
+    initialDelaySeconds: 30
+    periodSeconds: 60
     successThreshold: 1
     timeoutSeconds: 5
 
